@@ -14,4 +14,5 @@ public class ContatoDAO {
     private ResultSet rs = null;
     private Statement stmt = null;
     
+    
 }
