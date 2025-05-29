@@ -32,7 +32,18 @@ public class PrincipalContatoVIEW1 extends javax.swing.JFrame {
         modelo_jtl_consultar_contato = (DefaultTableModel) jTable_pesquisa_contato.getModel();
     }
     
-    
+    private void gravar() {
+        try {
+            contatoDTO.setNome_cont(nome_cont.getText());
+            contatoDTO.setTel_cont(tel_cont.getText());
+            contatoDTO.setEmail_cont(email_cont.getText());
+            
+            JOptionPane.showMessageDialog(null, contatoCTR.inserirContato(contatoDTO));
+        }
+        catch(Exception e) {
+            System.out.println("Erro ao Gravar" + e.getMessage());
+        }
+    }
     
     private void liberaCampos(boolean a) {
         nome_cont.setEnabled(a);
@@ -221,7 +232,23 @@ public class PrincipalContatoVIEW1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        if(gravar_alterar == 1) {
+            gravar();
+            gravar_alterar = 0;
+        }
+        else{
+            if(gravar_alterar == 2) {
+                gravar();
+                gravar_alterar = 0;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Erro no Sistea!!!");
+            }
+        }
         
+        limpaCampos();
+        liberaCampos(false);
+        liberaBotoes(true, false); 
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
