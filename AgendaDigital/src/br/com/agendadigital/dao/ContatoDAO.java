@@ -45,5 +45,42 @@ public class ContatoDAO {
         }
     }
     
+    public ResultSet bucarContato(ContatoDTO contatoDTO, int opcao) {
+        try {
+            ConexaoDAO1.ConnectDB();
+            
+            stmt = ConexaoDAO1.con.createStatement();
+            String comando = "";
+            
+            switch (opcao) {
+                case 1:
+                    comando = "Select c.*"+
+                            "from contato c "+
+                            "where nome_cont like '" + contatoDTO.getNome_cont()+ "%' " +
+                            "order by c.nome_cont";
+                    
+                break;
+                case 2:
+                    comando = "Select c.* "+
+                            "from contato c " +
+                            "where c.id_cont = " + contatoDTO.getId_cont();
+                    
+                break;
+                case 3:
+                    comando = "Select c.id_cont, c.nome_cont "+
+                            "from cont c ";
+                    
+                break;
+            }
+            
+            rs = stmt.executeQuery(comando.toUpperCase());
+            return rs;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return rs;
+        }
+    }
+    
     
 }
