@@ -82,5 +82,31 @@ public class ContatoDAO {
         }
     }
     
+    public boolean deletarContato(ContatoDTO contatoDTO) {
+        try {
+            
+            ConexaoDAO1.ConnectDB();
+            
+            stmt = ConexaoDAO1.con.createStatement();
+            
+            String comando = "Delete from contato where id_cont = "
+                    + contatoDTO.getId_cont();
+            
+            stmt.execute(comando);
+            
+            ConexaoDAO1.con.commit();
+            
+            stmt.close();
+            return true;
+       }
+        
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+       }
+       finally {
+            ConexaoDAO1.CloseDB();
+        }
+    }
     
 }
